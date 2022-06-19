@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { zones } from './composoble/state'
 </script>
 
 <template>
-  <div border="~ gray/20" m2>
-    <action-bar />
-    <pre>{{ zones }}</pre>
-    <time-schedular />
+  <div font-sans bg-canvas h-screen>
+    <nav-bar />
+    <div border="~ base rounded" m2 shadow bg-base>
+      <action-bar />
+      <time-schedular />
+    </div>
   </div>
 </template>
 
 <style>
-html {
+.dark {
   background: #222;
   color: white;
   color-scheme: dark;
