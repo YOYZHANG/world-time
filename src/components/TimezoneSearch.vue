@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Fuse from 'fuse.js'
-import type { Timezone } from 'timezones.json'
+import type { Timezone } from '../types'
 import { timezone } from '../composoble/data'
 
 const fuse = new Fuse(timezone, {
@@ -9,7 +9,7 @@ const fuse = new Fuse(timezone, {
 
 let input = $ref('')
 let index = $ref(0)
-const searchResult = computed(() => {
+const searchResult = $computed(() => {
   return fuse.search(input)
 })
 
@@ -17,6 +17,15 @@ function add(t: Timezone) {
   addToTimezone(t)
   input = ''
   index = 0
+}
+
+function onKeyDown(e: KeyboardEvent) {
+  if (e.key === 'ArrowDown')
+    index = (index + 1) % searchResult.length
+  else if (e.key === 'ArrowUp')
+    index = (index - 1 + searchResult.length) % searchResult.length
+  else if (e.key === 'Enter')
+    add(searchResult[index].item)
 }
 </script>
 
@@ -27,19 +36,20 @@ function add(t: Timezone) {
       type="text"
       placeholder="search timezone...."
       px2 py1 border="~ base rounded" bg-transparent w-full
+      @keydown="onKeyDown"
     >
-    <div absolute top-full bg-gray-900 left-0 right-0>
+    <div
+      absolute top-full
+      bg-base p1 border="~ base"
+      left-0 right-0 max-h-100 overflow-auto
+    >
       <button
-        v-for="i of searchResult"
-        :key="i.refIndex" flex gap2
+        v-for="i, idx of searchResult"
+        :key="i.refIndex" block
+        :class="idx === index ? 'bg-gray-5' : ''" w-full
         @click="add(i)"
       >
-        <div font-mono w-10 text-right>
-          {{ i.item.offset }}
-        </div>
-        <div>
-          {{ i.item.name }}
-        </div>
+        <timezone-item :timezone="i.item" />
       </button>
     </div>
   </div>
