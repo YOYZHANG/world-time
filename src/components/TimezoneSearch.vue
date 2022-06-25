@@ -35,17 +35,17 @@ function onKeyDown(e: KeyboardEvent) {
       v-model="input"
       type="text"
       placeholder="search timezone...."
-      px2 py1 border="~ base rounded" bg-transparent w-full
+      px2 py1 border="~ base rounded" bg-transparent w-full shadow
       @keydown="onKeyDown"
     >
     <div
-      absolute top-full
-      bg-base p1 border="~ base"
+      absolute top-full z-10
+      bg-base border="~ base"
       left-0 right-0 max-h-100 overflow-auto
     >
       <button
         v-for="i, idx of searchResult"
-        :key="i.refIndex" block
+        :key="i.refIndex" block px2
         :class="idx === index ? 'bg-gray-5' : ''" w-full
         @click="add(i)"
       >
