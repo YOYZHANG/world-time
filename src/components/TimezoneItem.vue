@@ -10,7 +10,7 @@ const city = computed(() => timezone.name.split('/')[1])
 </script>
 
 <template>
-  <div flex gap2 py1>
+  <div flex gap4 py1>
     <div w-8 ma text-right font-bold>
       {{ timezone.offset > 0 ? `+${timezone.offset}` : timezone.offset }}
     </div>

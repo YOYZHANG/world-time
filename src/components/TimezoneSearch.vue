@@ -45,9 +45,9 @@ function onKeyDown(e: KeyboardEvent) {
     >
       <button
         v-for="i, idx of searchResult"
-        :key="i.refIndex" block px2
+        :key="i.refIndex" block
         :class="idx === index ? 'bg-gray-5' : ''" w-full
-        @click="add(i)"
+        @click="add(i.item)"
       >
         <timezone-item :timezone="i.item" />
       </button>
