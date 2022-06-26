@@ -8,7 +8,9 @@
       :key="zone.name"
       px4 py2 border="b base" relative
     >
-      <timezone-item :timezone="zone" />
+      <timezone-item :timezone="zone">
+        <time-dial :timezone="zone" />
+      </timezone-item>
       <div absolute left="-20px" top-0 text-xl flex="~ col" justify-center>
         <button
           icon-btn i-carbon-close m--1px mt2

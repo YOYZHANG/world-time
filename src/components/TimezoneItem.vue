@@ -16,7 +16,7 @@ const time = computed(() => formatter.format(now.value))
 </script>
 
 <template>
-  <div flex gap4 py1>
+  <div flex flex-wrap gap4 py1>
     <div w-8 ma text-right font-bold>
       {{ timezone.offset > 0 ? `+${timezone.offset}` : timezone.offset }}
     </div>
@@ -34,5 +34,6 @@ const time = computed(() => formatter.format(now.value))
     <div tabular-nums>
       {{ time }}
     </div>
+    <slot />
   </div>
 </template>
